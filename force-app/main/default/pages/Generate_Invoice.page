@@ -1,0 +1,137 @@
+<apex:page controller="GenerateInvoiceController"
+           showHeader="false"
+           sidebar="false"
+           renderAs="pdf"
+           standardStylesheets="false"
+           applyHtmlTag="false"
+           >
+ 	
+    <head>
+<style>
+            body {
+            font-family: "Times New Roman", serif;
+            font-size: 12px;
+            color: #333;
+            }
+            .invoice-header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #aaa;
+            }
+            .invoice-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 40px;
+            }
+            .invoice-date {
+            margin-top: 5px;
+            }
+            .invoice-body {
+            padding: 15px 0;
+            }
+            table {
+            width: 100%;
+            border-collapse: collapse;
+            }
+            th,
+            td {
+            padding: 8px;
+            border: 1px solid #aaa;
+            }
+            .center-align {
+            text-align: center;
+            }
+            .left-align {
+            text-align: left;
+            }
+            .right-align {
+            text-align: right;
+            }
+            .total {
+            text-align: right;
+            font-weight: bold;
+            }
+            .total-label {
+            display: inline-block;
+            text-align: right;
+            margin-right: 5px;
+            }
+            .invoice-footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #aaa;
+            font-size: 12px;
+            }
+            .invoice-logo {
+            position: absolute;
+            padding: 12px;
+            top: 12px;
+            left: 0;
+            }
+</style>
+</head>
+
+        <body>
+            <div class="invoice-logo">
+            <img
+                        src="{!$Resource.DMLogo}"
+                        alt="Company Logo"
+                        height="50"
+                        />
+            </div>
+            
+            <div class="invoice-header">
+                <h1 class="invoice-title">INVOICE</h1>
+                <p class="invoice-date">
+                                Date:&nbsp;
+                    
+                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                        <apex:param value="{!invoiceDate}" />
+                    </apex:outputText>
+                    <apex:outputText value="{0,time,HH:mm:ss.SSS'Z'}">
+                        <apex:param value="{!invoiceDate}" />
+                    </apex:outputText>
+
+
+				</p>
+			</div>
+            
+            <div class="invoice-body">
+            <span> Invoice No:    </span>
+            <apex:outputText value="{!invoiceName}"> </apex:outputText>
+                <!--
+            <p>Billed from: <br/>
+            	<!--
+                <strong> {!sellerName} </strong><br /> 
+                            Seller GSTIN : {!sellerGSTIN} <br /> 
+				
+            </p>
+            <p>Billed to: <br/>
+            <strong> {!customerName} </strong>
+			
+            </p>
+            
+            <table>
+            <tr>
+            <th>Product Name</th>
+            <th class="center-align">Quantity</th>
+            <th class="right-align">Price</th>
+            </tr>
+            <apex:repeat value="{!invoiceLine}" var="inLine">
+            <tr>
+            <td>{!inLine.Name}</td>
+            <td class="center-align">
+            <apex:outputText value="{!inLine.Invoice_Line_Quantity__c}"> </apex:outputText>
+            </td>
+            <td class="center-align">
+            <apex:outputText value="{0,number,#,##0.00}">
+            <apex:param value="{!inLine.Invoice_Line_Price__c}" />
+            </apex:outputText>
+            </td>
+            </tr>
+            </apex:repeat>
+            </table>
+		-->
+</div>   
+    	</body>
+</apex:page>
