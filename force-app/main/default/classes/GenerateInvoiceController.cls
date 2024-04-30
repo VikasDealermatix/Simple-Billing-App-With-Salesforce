@@ -5,16 +5,28 @@ public class GenerateInvoiceController {
     public String invoiceName{get;set;}
     public Decimal totalAmount{get;set;}
     public String paymentID{get;set;}
-    
+    public String sellerName{get; set;}
+    public String sellerGSTIN{get; set;}
+    public String customerName{get; set;}
+    public String invoiceLine{get; set;}
+    public List<Payments__c> processedPayments{get; set;}
+    public List<Product_Order_Lines__c> productOrderLines{set; get;}
+        
     public GenerateInvoiceController() {
         getInvoice();
     }
     
-    private void getInvoice() {
-        Sale_Invoice__c invoice = [SELECT Name, Date__c, Time__c, Total_Amount__c, PaymentID__c 
+    public void getInvoice() {
+        
+        
+       	Sale_Invoice__c invoice = [SELECT Name, Date__c, Time__c, Total_Amount__c, PaymentID__c 
                                    FROM Sale_Invoice__c 
-                                   WHERE Name = 'INVOICE-1015'
                                    LIMIT 1];
+        
+        processedPayments = [SELECT Name, Product_Order__c, Status__c, Total_Amount__c, Date__c FROM Payments__c WHERE Status__c = 'Processed'];
+
+        productOrderLines = [SELECT Select_Product__c, Enter_Quantity__c, Total_Order_Line_Amount__c FROM Product_Order_Lines__c];
+       
         
         if(invoice != null) {
             invoiceDate = invoice.Date__c;
@@ -22,6 +34,10 @@ public class GenerateInvoiceController {
             invoiceName = invoice.Name;
             totalAmount = invoice.Total_Amount__c;
             paymentID = invoice.PaymentID__c;
+            sellerName = 'Redmi India';
+            sellerGSTIN = 'NPBKASDFJKLASDF';
+            customerName = 'Vikas Kare';
+            //invoiceLine = 'IVL-1001';
         }
     }
 }
